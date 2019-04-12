@@ -7,11 +7,7 @@ import { Pelicula} from '../interfaces/interfaces';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  slidesOpts = {
-    slidesPerView: 1.3,
-    freeMode: true
-  };
-
+ 
   peliculasRecientes: Pelicula[] = [];
   constructor( private movies: MoviesService ) {
 
