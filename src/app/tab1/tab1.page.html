@@ -30,6 +30,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <app-slideshow-poster [peliculas]="peliculasPopulares"></app-slideshow-poster>
+  <app-slideshow-pares (cargarMas)="cargarMasFavoritos()" [peliculas]="peliculasPopulares"></app-slideshow-pares>
 
 </ion-content>

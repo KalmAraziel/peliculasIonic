@@ -10,7 +10,7 @@ const API_KEY = environment.apiKey;
   providedIn: 'root'
 })
 export class MoviesService {
-
+  private popularesPages = 0;
   constructor(private http: HttpClient) {
 
   }
@@ -39,7 +39,8 @@ export class MoviesService {
   }
 
   getPopulares() {
-    const query = '/discover/movie?sort_by=popularity.desc';
+    this.popularesPages++;
+    const query = `/discover/movie?sort_by=popularity.desc&page=${this.popularesPages}`;
     return this.ejecutarQuery<RespuestaMDB>(query);
   }
 }
