@@ -9,7 +9,7 @@ import { Pelicula } from '../../interfaces/interfaces';
 export class SlideshowPosterComponent implements OnInit {
   @Input() peliculas: Pelicula[];
   slidesOpts = {
-    slidesPerView: 1.3,
+    slidesPerView: 3.3,
     freeMode: true
   };
   constructor() { }
