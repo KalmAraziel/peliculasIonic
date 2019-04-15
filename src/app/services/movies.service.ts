@@ -17,7 +17,8 @@ export class MoviesService {
 
   private ejecutarQuery<T>(query: string) {
     query = URL + query;
-    query += `&api_key=${API_KEY}&lenguaje=es&include_image_lenguaje=es`;
+    query += `&api_key=${API_KEY}&include_image_language=es&language=es`;
+    console.log(query);
     return this.http.get<T>(query);
   }
 
