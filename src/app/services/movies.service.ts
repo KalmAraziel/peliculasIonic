@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RespuestaMDB } from '../interfaces/interfaces';
+import { RespuestaMDB, PeliculaDetalle, RespuestaCredits } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 const URL = environment.url;
@@ -42,5 +42,13 @@ export class MoviesService {
     this.popularesPages++;
     const query = `/discover/movie?sort_by=popularity.desc&page=${this.popularesPages}`;
     return this.ejecutarQuery<RespuestaMDB>(query);
+  }
+
+  getDetallePelicula(id: any) {
+    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}?a=1`);
+  }
+
+  getActoresPelicula(id: any) {
+    return this.ejecutarQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
   }
 }
