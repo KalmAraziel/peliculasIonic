@@ -7,16 +7,21 @@ import { Pelicula} from '../interfaces/interfaces';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
- 
+  peliculasPopulares: Pelicula[] = [];
   peliculasRecientes: Pelicula[] = [];
+
   constructor( private movies: MoviesService ) {
 
   }
 
   ngOnInit(): void {
     this.movies.getFeature().subscribe( (peliculas) => {
-      console.log(peliculas.results);
       this.peliculasRecientes = peliculas.results;
-    })
+    });
+
+    this.movies.getPopulares().subscribe( peliculas => {
+      console.log('Populares: ', peliculas.results);
+      this.peliculasPopulares = peliculas.results;
+    });
   }
 }
