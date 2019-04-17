@@ -11,6 +11,9 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 // Estilos propios
+ion-list {
+  background: var(--ion-color-dark) !important;
+}
 .poster {
   width: 110px !important;
   height: 160px !important;
