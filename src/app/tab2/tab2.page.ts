@@ -2,6 +2,7 @@ import { MoviesService } from './../services/movies.service';
 import { Component } from '@angular/core';
 import { Pelicula } from '../interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
+import { DetalleComponent } from '../components/detalle/detalle.component';
 
 @Component({
   selector: 'app-tab2',
@@ -20,14 +21,22 @@ export class Tab2Page {
   ) {
 
   }
-  detallePelicula(pelicua: Pelicula) {
-
+  
+  async detallePelicula(pelicula: Pelicula) {
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps: {
+        idPelicula: pelicula.id
+      }
+    });
+    modal.present();
   }
+
   buscar(event) {
     this.buscando = true;
     const valor: string = event.detail.value;
     console.log(valor);
-    if(valor !== ''){
+    if(valor !== '') {
       this.movieServ.buscarPeliculas(valor).subscribe(resp => {
         this.peliculas = resp['results'];
         this.buscando = false;
@@ -36,6 +45,6 @@ export class Tab2Page {
       this.peliculas = [];
       this.buscando = false;
     }
-    
+
   }
 }
