@@ -21,7 +21,7 @@ export class Tab2Page {
   ) {
 
   }
-  
+
   async detallePelicula(pelicula: Pelicula) {
     const modal = await this.modalCtrl.create({
       component: DetalleComponent,
@@ -36,7 +36,7 @@ export class Tab2Page {
     this.buscando = true;
     const valor: string = event.detail.value;
     console.log(valor);
-    if(valor !== '') {
+    if (valor !== '') {
       this.movieServ.buscarPeliculas(valor).subscribe(resp => {
         this.peliculas = resp['results'];
         this.buscando = false;

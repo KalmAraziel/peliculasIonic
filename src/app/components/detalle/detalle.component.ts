@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { Pelicula, PeliculaDetalle, Cast } from '../../interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
+import { DataLocalService } from 'src/app/services/data-local.service';
 
 @Component({
   selector: 'app-detalle',
@@ -18,7 +19,11 @@ export class DetalleComponent implements OnInit {
     slidesPerView: 2.5,
     freeMode: true
   };
-  constructor(private movisServ: MoviesService, private modalCtrl: ModalController) {
+  constructor(
+    private movisServ: MoviesService,
+    private modalCtrl: ModalController,
+    private dataLocal: DataLocalService
+  ) {
   }
 
   ngOnInit() {
@@ -38,6 +43,7 @@ export class DetalleComponent implements OnInit {
   }
 
   favorito() {
+    this.dataLocal.guardarPelicula(this.pelicula);
 
   }
 
