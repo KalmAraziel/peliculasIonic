@@ -13,24 +13,27 @@ export class DataLocalService {
   }
 
   guardarPelicula( pelicula: PeliculaDetalle ) {
+
     let existe = false;
     let mensaje = '';
+
     for (const peli of this.peliculas) {
       if (peli.id === pelicula.id) {
         existe = true;
         break;
       }
     }
+
     if (existe) {
-      this.peliculas.filter(peli => peli.id !== pelicula.id);
+      this.peliculas = this.peliculas.filter(peli => peli.id !== pelicula.id);
       mensaje = 'Removido de Favoritos';
     } else {
       this.peliculas.push(pelicula);
       mensaje = 'Agregada de Favoritos';
     }
+
     this.storage.set('peliculas', this.peliculas);
     this.presentToast(mensaje);
-
     return !existe;
   }
 
@@ -44,6 +47,7 @@ export class DataLocalService {
 
   async cargarFavoritos() {
     const peliculas = await this.storage.get('peliculas');
+    console.log(this.storage.get('peliculas'));
     this.peliculas = peliculas || [];
     return this.peliculas;
   }
