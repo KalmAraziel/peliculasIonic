@@ -19,6 +19,7 @@ export class DetalleComponent implements OnInit {
     slidesPerView: 2.5,
     freeMode: true
   };
+  estrella = 'star-outline';
   constructor(
     private movisServ: MoviesService,
     private modalCtrl: ModalController,
@@ -27,7 +28,11 @@ export class DetalleComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('idPelicula: ', this.idPelicula);
+    // console.log('idPelicula: ', this.idPelicula);
+
+    this.dataLocal.existePelicula(this.idPelicula).then(existe => {
+      this.estrella = (existe) ? 'star' : 'star-outline' ;
+    });
     this.movisServ.getDetallePelicula(this.idPelicula).subscribe(detallePelicula => {
       console.log(detallePelicula);
       this.pelicula = detallePelicula;
@@ -43,7 +48,8 @@ export class DetalleComponent implements OnInit {
   }
 
   favorito() {
-    this.dataLocal.guardarPelicula(this.pelicula);
+    const existe = this.dataLocal.guardarPelicula(this.pelicula);
+    this.estrella = (existe) ? 'star' : 'star-outline' ;
 
   }
 

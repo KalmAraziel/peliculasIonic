@@ -8,8 +8,8 @@ import { ToastController } from '@ionic/angular';
 export class DataLocalService {
   peliculas: PeliculaDetalle[] = [];
 
-  constructor(private storege: Storage, public toastController: ToastController) {
-
+  constructor(private storage: Storage, public toastController: ToastController) {
+    this.cargarFavoritos();
   }
 
   guardarPelicula( pelicula: PeliculaDetalle ) {
@@ -28,8 +28,10 @@ export class DataLocalService {
       this.peliculas.push(pelicula);
       mensaje = 'Agregada de Favoritos';
     }
-    this.storege.set('peliculas', this.peliculas);
+    this.storage.set('peliculas', this.peliculas);
     this.presentToast(mensaje);
+
+    return !existe;
   }
 
   async presentToast(message: string) {
@@ -40,4 +42,15 @@ export class DataLocalService {
     toast.present();
   }
 
+  async cargarFavoritos() {
+    const peliculas = await this.storage.get('peliculas');
+    this.peliculas = peliculas || [];
+    return this.peliculas;
+  }
+
+  async existePelicula(peliculaId) {
+    await this.cargarFavoritos();
+    const existe = this.peliculas.find(peli => peli.id === peliculaId);
+    return (existe) ? true : false;
+  }
 }
